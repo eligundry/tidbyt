@@ -69,8 +69,7 @@ def main(config):
                 main_align = "space_evenly",
                 cross_align = "center",
                 children = [
-                    # render.Image(src=FEELING_EMOJIS[mood]),
-                    render.Image(src=FEELING_EMOJIS['awful']),
+                    render.Image(src=FEELING_EMOJIS[mood]),
                     render.Column(
                         expanded = True,
                         main_align = "space_evenly",
