@@ -17,7 +17,9 @@ def main(config):
     latest_feeling = cache.get("latest_feeling")
 
     if latest_feeling == None:
-        resp = http.get("https://api.eligundry.com/api/feelings")
+        resp = http.get("https://api.eligundry.com/api/feelings", headers = {
+            'user-agent': 'Feelings Display 4 Tidbyt',
+        })
 
         if resp.status_code != 200:
             fail("Could not load data from API (status: %d)", resp.status_code)
