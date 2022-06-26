@@ -17,7 +17,7 @@ def main(config):
     latest_feeling = cache.get("latest_feeling")
 
     if latest_feeling == None:
-        resp = http.get("https://api.eligundry.com/api/feelings", headers = {
+        resp = http.get("https://api.eligundry.com/api/feelings/time/today", headers = {
             'user-agent': 'Feelings Display 4 Tidbyt',
         })
 
