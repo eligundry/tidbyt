@@ -23,7 +23,7 @@ def main(config):
             fail("Could not load data from API (status: %d)", resp.status_code)
 
         latest_feeling = resp.json()[0]
-        cache.set("latest_feeling", json.encode(latest_feeling), ttl_seconds=60 * 60 * 60)
+        cache.set("latest_feeling", json.encode(latest_feeling), ttl_seconds=60 * 60)
 
     else:
         latest_feeling = json.decode(latest_feeling)
