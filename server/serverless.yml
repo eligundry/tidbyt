@@ -1,0 +1,14 @@
+service: tidbyt-updater
+frameworkVersion: '3'
+
+useDotenv: true
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: us-east-2
+
+functions:
+  tidbyt:
+    handler: handler.tidbyt
+    events:
+      - schedule: rate(1 hour)
