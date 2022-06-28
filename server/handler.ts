@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const deviceID = process.env.DEVICE_ID
 const apiToken = process.env.API_TOKEN
+const userAgent = 'Eli Gundry <https://github.com/eligundry/tidbyt>'
 
 if (!deviceID) {
   throw new Error(`DEVICE_ID env var must be set`)
@@ -39,6 +40,9 @@ const generateWidget = async (widgetURL: string): Promise<string> =>
         applet: widgetURL,
         output: 'base64',
       },
+      headers: {
+        'user-agent': userAgent,
+      },
     })
     .then((resp) => resp.data)
 
@@ -55,6 +59,7 @@ const uploadWidget = async (name: string, image: string) =>
       headers: {
         authorization: `Bearer ${apiToken}`,
         'content-type': 'application/json',
+        'user-agent': userAgent,
       },
     }
   )
