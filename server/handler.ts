@@ -43,6 +43,7 @@ const generateWidget = async (widgetURL: string): Promise<string> =>
       headers: {
         'user-agent': userAgent,
       },
+      timeout: 15,
     })
     .then((resp) => resp.data)
 
@@ -61,6 +62,7 @@ const uploadWidget = async (name: string, image: string) =>
         'content-type': 'application/json',
         'user-agent': userAgent,
       },
+      timeout: 15,
     }
   )
 
@@ -71,8 +73,24 @@ export const tidbyt = async () => {
   await Promise.all(
     Object.entries(widgets).map(async ([name, widgetURL]) => {
       log('info', 'generating image', { name })
-      const image = await generateWidget(widgetURL)
-      log('info', 'generated image', { name })
+
+      try {
+        var image = await generateWidget(widgetURL)
+        log('info', 'successfully generated image', { name })
+      } catch (e) {
+        if (e.response) {
+          failed[name] = e.response.data
+        } else {
+          failed[name] = e.message
+        }
+
+        log('error', 'failed to generate image', {
+          name,
+          error: failed[name],
+        })
+        return
+      }
+
       log('info', 'uploading image to tidbyt', { name })
 
       try {
@@ -91,7 +109,7 @@ export const tidbyt = async () => {
 
         log('error', 'failed to upload image to tidbyt', {
           name,
-          response: failed[name],
+          error: failed[name],
         })
       }
     })
