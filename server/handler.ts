@@ -98,15 +98,11 @@ export const tidbyt = async () => {
   )
 
   return {
-    statusCode: 200,
-    body: JSON.stringify(
-      {
-        successful,
-        failed,
-      },
-      null,
-      2
-    ),
+    statusCode: Object.keys(failed).length > 0 ? 500 : 200,
+    body: JSON.stringify({
+      successful,
+      failed,
+    }),
   }
 }
 
