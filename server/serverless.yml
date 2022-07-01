@@ -19,5 +19,6 @@ functions:
     environment:
       API_TOKEN: "${env:API_TOKEN}"
       DEVICE_ID: "${env:DEVICE_ID}"
+    timeout: 120
     events:
       - schedule: rate(1 hour)

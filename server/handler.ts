@@ -43,7 +43,7 @@ const generateWidget = async (widgetURL: string): Promise<string> =>
       headers: {
         'user-agent': userAgent,
       },
-      timeout: 15,
+      timeout: 60 * 1000,
     })
     .then((resp) => resp.data)
 
@@ -62,7 +62,7 @@ const uploadWidget = async (name: string, image: string) =>
         'content-type': 'application/json',
         'user-agent': userAgent,
       },
-      timeout: 15,
+      timeout: 60 * 1000,
     }
   )
 
