@@ -41,7 +41,7 @@ def main():
                         cross_align = "center",
                         children = [
                             render.Image(src = AVATAR),
-                            render.Text(" @dril", color = "#099"),
+                            render.Text(" @dril", color = "#1DA1F2"),
                         ]
                     ),
                     render.WrappedText(selected_tweet),
