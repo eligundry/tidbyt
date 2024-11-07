@@ -17,14 +17,14 @@ def main(config):
     latest_feeling = cache.get("latest_feeling")
 
     if latest_feeling == None:
-        resp = http.get("https://eligundry.com/api/daylio", headers = {
+        resp = http.get("https://eligundry.com/api/daylio/today.json", headers = {
             'user-agent': 'Feelings Display 4 Tidbyt',
         })
 
         if resp.status_code != 200:
             fail("Could not load data from API (status: %d)", resp.status_code)
 
-        latest_feeling = resp.json()[0]
+        latest_feeling = resp.json()
         cache.set("latest_feeling", json.encode(latest_feeling), ttl_seconds=60 * 60)
 
     else:
